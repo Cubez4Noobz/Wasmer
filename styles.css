@@ -1,0 +1,420 @@
+/*!
+ * styles.css
+ * Clean, minimal site design with documented utility classes and components.
+ * Place this file at /C:/Users/cubez/Documents/GitHub/Wasmer/styles.css
+ *
+ * Usage:
+ * - Include <link rel="stylesheet" href="styles.css"> in your HTML.
+ * - Use semantic elements (header, nav, main, footer) and utility classes below.
+ *
+ * Design goals:
+ * - Readable typography, responsive layout, accessible focus states.
+ * - Custom properties for easy theming.
+ */
+
+/* ========================================================================== */
+/* Custom properties (theme tokens)                                           */
+/* ========================================================================== */
+:root {
+    /* Colors */
+    --bg: #0f1724;           /* dark background */
+    --surface: #0b1220;      /* card background */
+    --muted: #94a3b8;        /* muted text */
+    --text: #e6eef8;         /* primary text */
+    --accent: #60a5fa;       /* primary accent */
+    --accent-600: #3b82f6;
+    --success: #10b981;
+    --danger: #ef4444;
+
+    /* Typography */
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+                             Arial, "Noto Sans", "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+    --base-font-size: 16px;
+    --line-height: 1.5;
+
+    /* Spacing scale */
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+
+    /* Layout */
+    --container-max-width: 1100px;
+    --radius: 8px;
+    --shadow-sm: 0 1px 2px rgba(2,6,23,0.6);
+    --shadow-lg: 0 10px 30px rgba(2,6,23,0.7);
+}
+
+/* ========================================================================== */
+/* Reset / base                                                                */
+/* ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+html {
+    font-size: var(--base-font-size);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    line-height: var(--line-height);
+    background: linear-gradient(180deg, var(--bg) 0%, #061124 100%);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Make images and media responsive */
+img, picture, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Remove default link styles but keep focus */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+/* ========================================================================== */
+/* Layout helpers                                                              */
+/* ========================================================================== */
+.container {
+    width: 90%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+}
+
+/* Simple vertical stack spacing */
+.stack > * + * {
+    margin-top: var(--space-md);
+}
+
+/* Horizontal flex utility */
+.row {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Centering helper */
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Small, medium, large spacing helpers */
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mb-sm { margin-bottom: var(--space-sm); }
+
+/* Screen-reader only */
+.sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    border: 0;
+}
+
+/* ========================================================================== */
+/* Header / Navigation                                                         */
+/* ========================================================================== */
+.site-header {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+    color: var(--text);
+    font-size: 1.125rem;
+}
+.logo .mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-600));
+    box-shadow: var(--shadow-sm);
+}
+
+/* Primary navigation */
+.nav {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+.nav a {
+    color: var(--muted);
+    padding: calc(var(--space-xs) / 2) var(--space-sm);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background .15s ease, color .15s ease;
+}
+.nav a:hover,
+.nav a:focus {
+    background: rgba(255,255,255,0.02);
+    color: var(--text);
+}
+
+/* ========================================================================== */
+/* Hero                                                                        */
+/* ========================================================================== */
+.hero {
+    padding: calc(var(--space-xl) + var(--space-md)) 0;
+    text-align: left;
+}
+.hero .eyebrow {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    margin-bottom: var(--space-sm);
+}
+.hero h1 {
+    margin: 0 0 var(--space-md) 0;
+    font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+    line-height: 1.05;
+    color: var(--text);
+}
+.hero p {
+    margin: 0;
+    color: var(--muted);
+    max-width: 70ch;
+    font-size: 1rem;
+}
+
+/* CTA group */
+.cta {
+    margin-top: var(--space-lg);
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+/* ========================================================================== */
+/* Cards & Content blocks                                                      */
+/* ========================================================================== */
+.card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border: 1px solid rgba(255,255,255,0.03);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Grid system for cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-lg);
+}
+.grid-cols-3 > * {
+    grid-column: span 4;
+}
+.grid-cols-2 > * {
+    grid-column: span 6;
+}
+.grid-cols-1 > * {
+    grid-column: span 12;
+}
+
+/* Card header/title */
+.card-title {
+    margin: 0 0 var(--space-sm) 0;
+    font-size: 1.125rem;
+    color: var(--text);
+}
+.card-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* List inside cards */
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.card-list li + li {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px dashed rgba(255,255,255,0.02);
+}
+
+/* ========================================================================== */
+/* Buttons & forms                                                             */
+/* ========================================================================== */
+/* Base button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .12s ease, background .12s ease;
+    background: rgba(255,255,255,0.03);
+    color: var(--text);
+}
+.btn:active { transform: translateY(1px); }
+
+/* Primary / accent button */
+.btn--primary {
+    background: linear-gradient(90deg, var(--accent), var(--accent-600));
+    color: white;
+    box-shadow: 0 6px 18px rgba(59,130,246,0.12);
+    border: 1px solid rgba(255,255,255,0.02);
+}
+.btn--primary:hover { filter: brightness(1.03); }
+
+/* Ghost / subtle button */
+.btn--ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+}
+
+/* Form controls */
+.form {
+    display: grid;
+    gap: var(--space-sm);
+}
+.input,
+.select,
+textarea {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+.input:focus,
+.select:focus,
+textarea:focus {
+    outline: none;
+    border-color: rgba(96,165,250,0.9);
+    box-shadow: 0 6px 18px rgba(96,165,250,0.08);
+}
+
+/* Inline form row */
+.form-row {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+/* ========================================================================== */
+/* Footer                                                                      */
+/* ========================================================================== */
+.site-footer {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid rgba(255,255,255,0.03);
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* ========================================================================== */
+/* Accessibility & focus                                                        */
+/* ========================================================================== */
+/* Visible focus ring for keyboard users */
+:focus {
+    outline: 3px solid rgba(96,165,250,0.16);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* Make interactive elements reachable and distinguishable */
+button, [role="button"], a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ========================================================================== */
+/* Tiny components                                                              */
+/* ========================================================================== */
+.pill {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+.kv {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: baseline;
+}
+.kv .k { color: var(--muted); font-size: 0.85rem; }
+.kv .v { color: var(--text); font-weight: 700; }
+
+/* Muted text */
+.muted { color: var(--muted); }
+
+/* ========================================================================== */
+/* Responsive breakpoints                                                       */
+/* ========================================================================== */
+@media (max-width: 900px) {
+    .grid-cols-3 > * { grid-column: span 12; }
+    .grid-cols-2 > * { grid-column: span 12; }
+    .site-header .container { padding-left: 4vw; padding-right: 4vw; }
+    .hero { text-align: center; }
+    .nav { display: none; } /* hide desktop nav on small screens; implement mobile nav separately */
+}
+
+@media (min-width: 901px) {
+    .hero { padding-top: calc(var(--space-xl) + var(--space-lg)); }
+}
+
+/* ========================================================================== */
+/* Utilities for quick prototyping                                              */
+/* ========================================================================== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.w-full { width: 100%; }
+.max-w-xs { max-width: 360px; }
+
+/* ========================================================================== */
+/* End of file                                                                  */
+/* ========================================================================== */
