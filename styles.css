@@ -447,19 +447,27 @@ html::after {
 html::before {
     background-size: var(--snow-density-1) var(--snow-density-1);
     opacity: 0.92;
-    animation: snow-fall 20s linear infinite;
+    animation: snow-fall-drift 20s linear infinite;
 }
 
 html::after {
     background-size: var(--snow-density-2) var(--snow-density-2);
     opacity: 0.6;
-    animation: snow-fall 36s linear infinite;
-    transform: translateX(30%);
+    animation: snow-fall-sway 36s linear infinite;
 }
 
-@keyframes snow-fall {
-    from { transform: translateY(0); }
-    to   { transform: translateY(100%); }
+@keyframes snow-fall-drift {
+    0%   { transform: translateX(-6%) translateY(0); }
+    50%  { transform: translateX(6%) translateY(50%); }
+    100% { transform: translateX(-6%) translateY(100%); }
+}
+
+@keyframes snow-fall-sway {
+    0%   { transform: translateX(0%) translateY(0); }
+    25%  { transform: translateX(10%) translateY(25%); }
+    50%  { transform: translateX(-8%) translateY(50%); }
+    75%  { transform: translateX(8%) translateY(75%); }
+    100% { transform: translateX(0%) translateY(100%); }
 }
 
 /* ========================================================================== */
