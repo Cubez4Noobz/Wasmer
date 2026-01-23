@@ -231,11 +231,15 @@ a:focus {
 /* Cards & Content blocks                                                      */
 /* ========================================================================== */
 .card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-    border: 1px solid rgba(255,255,255,0.03);
+    position: relative;
+    z-index: 2; /* make sure cards sit above decorative backgrounds */
+    background-color: rgba(11,18,32,0.64);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
     padding: var(--space-md);
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(4px);
 }
 
 /* Grid system for cards */
